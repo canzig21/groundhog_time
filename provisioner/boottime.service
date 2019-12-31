@@ -1,0 +1,4 @@
+[Service]
+ExecStart=/root/boottime.sh
+[Install]
+WantedBy=default.target

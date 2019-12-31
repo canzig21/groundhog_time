@@ -1,0 +1,32 @@
+{
+	"builders": [{
+		"type": "amazon-ebs",
+		"access_key": "{{user `aws_access_key`}}",
+		"secret_key": "{{user `aws_secret_key`}}",
+		"region": "us-east-1",
+		"source_ami_filter": {
+            "filters": {
+                "virtualization-type": "hvm",
+                "name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
+                "root-device-type": "ebs"
+            },
+            "owners": ["099720109477"],
+            "most_recent": true
+        },
+		"instance_type": "t2.medium",
+		"ssh_username": "ubuntu",
+		"ami_name": "Time-{{isotime | clean_resource_name}}",
+		"ami_description": "EC2 AMI Time",
+		"tags": {
+			"role": "Time"
+		},
+		"run_tags": {
+			"role": "production_time"
+		}
+	}],
+	"provisioners": [{
+		"type": "shell",
+		"script": "../provisioner/provision.sh"
+    }]
+
+}
