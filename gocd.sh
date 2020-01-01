@@ -1,3 +1,3 @@
 #!/bin/bash
 set -e
-packer /packer/packer_time.json
+sudo packer /packer/packer_time.json
